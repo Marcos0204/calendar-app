@@ -7,9 +7,19 @@ html, body {
     display: flex;
     flex-flow: column;
     height: 100vh;
+    width: 100vw;
     
 }
 
 .rbc-calendar {
     height: 100%;
+    width: 100vw;
+}
+
+.cardEvent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
