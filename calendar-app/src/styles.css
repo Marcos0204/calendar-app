@@ -117,3 +117,15 @@
     position: fixed;
     left: 25px;
 }
+
+
+/*Date picker*/
+
+
+.react-datetime-picker input:focus {
+    outline: none;
+}
+
+.react-datetime-picker__wrapper {
+    border: 0px solid gray !important;
+}
