@@ -26,11 +26,12 @@ export const CalendarModal = () => {
     const [ dateStart, setDateStart ] = useState( now.toDate() );
     const [ dateEnd, setDateEnd ] = useState( nowPlus1.toDate() );
     const [formVlues, setFormVlues] = useState({
-        title:'envento',
+        title:'',
         notes: '',
         start: dateStart,
         end: dateEnd
     })
+    const [titleValid, setTitleValid] = useState(true)
 
     const closeModal = (e) => {
         console.log(e)
@@ -51,7 +52,7 @@ export const CalendarModal = () => {
         })
     }
 
-    const { title, notes } = formVlues
+    const { title, notes, start, end } = formVlues
 
     const handleInputChange = ( { target } ) =>{
         
@@ -63,7 +64,20 @@ export const CalendarModal = () => {
 
     const handleSubmit = ( e ) =>{
         e.preventDefault()
-        console.log(formVlues)
+        const momentStart = moment( start )
+        const momentEnd = moment( end )
+        if ( momentStart.isSameOrAfter( momentEnd ) ){
+            return;
+        }
+
+        if ( title.trim() < 2 ){
+            return setTitleValid(false)
+        }
+        
+        ///todo 
+        //////realizar grabacion en bsase de datos
+        setTitleValid(true)
+        closeModal()
     }
     return (
         <Modal
@@ -105,8 +119,7 @@ export const CalendarModal = () => {
                     <label>Titulo y notas</label>
                     <input 
                         type="text" 
-                        // className={ `form-control ${ !titleValid && 'is-invalid' } `}
-                        className={ `form-control`}
+                        className={ `form-control ${ !titleValid && 'is-invalid' } `}
                         placeholder="Título del evento"
                         name="title"
                         autoComplete="off"
