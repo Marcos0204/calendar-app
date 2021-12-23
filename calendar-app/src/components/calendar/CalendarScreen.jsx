@@ -28,11 +28,11 @@ export const CalendarScreen = () => {
 
 
     const onDoubleClickEvent = e => {
-        console.log(e)
+       console.log('abrir')
     }
 
     const onSelectEvent = e => {
-        console.log(e)
+       // console.log(e)
     }
 
     const onViewChange = e => {

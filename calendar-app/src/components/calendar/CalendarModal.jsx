@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 
 const customStyles = {
@@ -22,6 +23,8 @@ const now = moment().minutes(0).seconds(0).add(1,'hours'); // 3:00:00
 const nowPlus1 = now.clone().add(1, 'hours');
 
 export const CalendarModal = () => {
+
+    const {ui} = useSelector( state => state.ui)
 
     const [ dateStart, setDateStart ] = useState( now.toDate() );
     const [ dateEnd, setDateEnd ] = useState( nowPlus1.toDate() );
@@ -81,7 +84,7 @@ export const CalendarModal = () => {
     }
     return (
         <Modal
-          isOpen={ true }
+          isOpen={ ui }
           onRequestClose={ closeModal }
           style={ customStyles }
           closeTimeoutMS={ 200 }
