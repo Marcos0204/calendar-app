@@ -28,7 +28,7 @@ export const CalendarScreen = () => {
 
 
     const onDoubleClickEvent = e => {
-       console.log('abrir')
+       //console.log('abrir')
     }
 
     const onSelectEvent = e => {
