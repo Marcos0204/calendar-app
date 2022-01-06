@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState } from 'react'
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { uiCloseModal } from '../../redux/actions/ui'
 
 
 const customStyles = {
@@ -24,7 +25,9 @@ const nowPlus1 = now.clone().add(1, 'hours');
 
 export const CalendarModal = () => {
 
-    const {ui} = useSelector( state => state.ui)
+    const dispatch = useDispatch()
+    const {openModal} = useSelector( state => state.ui)
+
 
     const [ dateStart, setDateStart ] = useState( now.toDate() );
     const [ dateEnd, setDateEnd ] = useState( nowPlus1.toDate() );
@@ -35,9 +38,11 @@ export const CalendarModal = () => {
         end: dateEnd
     })
     const [titleValid, setTitleValid] = useState(true)
+    
 
     const closeModal = (e) => {
         console.log(e)
+        dispatch( uiCloseModal() )
     }
  
     const handleStartDateChange = ( e ) => {
@@ -79,12 +84,12 @@ export const CalendarModal = () => {
         
         ///todo 
         //////realizar grabacion en bsase de datos
-        setTitleValid(true)
+        setTitleValid(openModal)
         closeModal()
     }
     return (
         <Modal
-          isOpen={ ui }
+          isOpen={ openModal }
           onRequestClose={ closeModal }
           style={ customStyles }
           closeTimeoutMS={ 200 }
